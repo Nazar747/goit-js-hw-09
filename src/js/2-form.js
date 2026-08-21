@@ -8,8 +8,11 @@ const input = form.elements.email;
 const textarea = form.elements.message;
 
 const saved = JSON.parse(localStorage.getItem(LS_Key) || '{}');
-input.value = saved.email || '';
-textarea.value = saved.message || '';
+formData.email = saved.email || '';
+formData.message = saved.message || '';
+
+input.value = formData.email;
+textarea.value = formData.message;
 
 form.addEventListener('input', event => {
   if (event.target.name === 'email') {
@@ -28,6 +31,10 @@ form.addEventListener('submit', event => {
   ) {
     return alert('Fill please all fields');
   }
+  console.log(formData);
+
+  formData.email = '';
+  formData.message = '';
   localStorage.removeItem(LS_Key);
   form.reset();
 });
